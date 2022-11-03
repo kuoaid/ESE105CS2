@@ -6,8 +6,7 @@ function f = siroutput_full(x,t)
 
 % Here is a suggested framework for x.  However, you are free to deviate
 % from this if you wish.
-x = [0.05, 0.01, 0.1, 0.9, 0.1, 0, 0];
-t = 100;
+
 % set up transmission constants
 k_infections = x(1);
 k_fatality = x(2);

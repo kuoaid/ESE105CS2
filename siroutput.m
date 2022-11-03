@@ -4,7 +4,6 @@
 % data - actual data that you are attempting to fit
 
 function f = siroutput(x,t,data)
-
 % set up transmission constants
 k_infections = x(1);
 k_fatality = x(2);
@@ -35,10 +34,10 @@ y = lsim(sys_sir_base,zeros(t,1),linspace(0,t-1,t),x0);
 % modeled data and the true data. Norms and distances will be useful here.
 % Hint: This is a central part of this case study!  choices here will have
 % a big impact!
-cases = table2array(data(1:t,"cases"));
-deaths = table2array(data(1:t,"deaths"));
-yin = y(1:t,2);
-yde = y(1:t,4);
-f = norm(cases - yin) + norm(deaths - yde);
+cases = data(:,2);
+deaths = data(:,1);
+yinfec = y(:,2);
+ydeath = y(:,4);
+f = norm(ydeath - deaths) + norm(yinfec - cases);
 
 end

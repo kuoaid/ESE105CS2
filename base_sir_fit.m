@@ -1,6 +1,8 @@
 load('COVIDdata.mat');
-coviddata = COVID_STLmetro; % TO SPECIFY
-t = 100 ; % TO SPECIFY
+covidda = table2array(COVID_STLmetro(:,5:6));
+coviddata = covidda./2737140; % TO SPECIFY
+
+t = length(coviddata); % TO SPECIFY
 
 % The following line creates an 'anonymous' function that will return the cost (i.e., the model fitting error) given a set
 % of parameters.  There are some technical reasons for setting this up in this way.
@@ -27,15 +29,15 @@ Af = [0, 0, 0, 1, 1, 1, 1];
 bf = 1;
 
 %% set up upper and lower bound constraints
-% Set upper and lower bounds on the parameters
+% Set upper and lower bounds on the parameters  
 % lb < x < ub
 % here, the inequality is imposed element-wise
 % If you don't want such a constraint, keep these matrices empty.
-ub = [1, 1, 1, 1, 1, 1, 1]';
+ub = [1, 0.7, 0.7, 1, 1, 1, 0.9]';
 lb = [0, 0, 0, 0, 0, 0, 0]';
 
 % Specify some initial parameters for the optimizer to start from
-x0 = [0.05, 0.02, 0.01, 0.99, 0.01, 0, 0]; 
+x0 = [0.0812, 0.011, 0.59, 1, 0, 0, 0]; 
 
 % This is the key line that tries to opimize your model parameters in order to
 % fit the data
@@ -47,18 +49,12 @@ x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
 %xlabel('Time')
 
 Y_fit = siroutput_full(x,t);
-
-figure;
-hold on;
-plot(Y_fit(1:t,2));
-plot(Y_fit(1:t,4));
-hold off;
-figure;
-hold on;
-plot(table2array(coviddata(1:t,"cases")));
-plot(table2array(coviddata(1:t,"deaths")));
-hold off;
-
+Y_fit24 = [Y_fit(:,2) Y_fit(:,4)];
 
 % Make some plots that illustrate your findings.
 % TO ADD
+figure;
+hold on;
+plot(coviddata);
+plot(Y_fit24);
+hold off;

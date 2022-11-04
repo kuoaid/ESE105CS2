@@ -20,11 +20,12 @@ find0 = @(movaccele_1)find(diff(sign(movaccele_1)));
 % Because there's a continues three numbers of 539, 540, 541, so just take
 % 540 as the phase point to represent the three.
 phasepoints = [275 449 540 590 674 756];
-
+%%
 begin = 0;
 t = 275-begin;
 Y_fit_1 = siroutput(xnew,t,coviddata(1:t,:));
 Y_fit_1_24 = [Y_fit_1(:,2) Y_fit_1(:,4)];
+%%
 
 begin = 275;
 t = 449-begin;

@@ -17,6 +17,7 @@ Y = lsim(sys_sir_base,zeros(100,1),linspace(0,99,100),x0);
 % places of data.
 
 % plot the output trajectory
+figure;
 plot(Y);
 legend('S','I','R','D');
 xlabel('Time')

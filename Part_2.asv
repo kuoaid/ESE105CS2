@@ -22,29 +22,29 @@ find0 = @(movaccele_1)find(diff(sign(movaccele_1)));
 phasepoints = [275 449 540 590 674 756];
 
 begin = 0;
-t = 275-begin;
-Y_fit_1 = siroutput(xnew,t,coviddata(1:t,:));
+t = 275;
+Y_fit_1 = siroutput_full(xnew,t);
 Y_fit_1_24 = [Y_fit_1(:,2) Y_fit_1(:,4)];
 
-begin = 275;
-t = 449-begin;
+begin = 276;
+t = 449;
 Y_fit_2 = siroutput_full(xnew,t);
-Y_fit_2_24 = [Y_fit_2(:,2)+Y_fit_1(end,2) Y_fit_2(:,4)+Y_fit_1(end,4)];
+Y_fit_2_24 = [Y_fit_2(:,2) Y_fit_2(:,4)];
 
-begin = 449;
-t = 590-begin;
+a = 450;
+t = 590;
 Y_fit_3 = siroutput_full(xnew,t);
-Y_fit_3_24 = [Y_fit_3(:,2)+Y_fit_2(end,2) Y_fit_3(:,4)+Y_fit_2(end,4)];
+Y_fit_3_24 = [Y_fit_2(:,2) Y_fit_2(:,4)];
 
-begin = 590;
-t = 674-begin;
+a = 591;
+t = 674;
 Y_fit_4 = siroutput_full(xnew,t);
-Y_fit_4_24 = [Y_fit_4(:,2)+Y_fit_3(end,2) Y_fit_4(:,4)+Y_fit_3(end,4)];
+Y_fit_4_24 = [Y_fit_2(:,2) Y_fit_2(:,4)];
 
-begin = 674;
-t = 756-begin;
+a = 675;
+t = 756;
 Y_fit_5 = siroutput_full(xnew,t);
-Y_fit_5_24 = [Y_fit_5(:,2)+Y_fit_4(end,2) Y_fit_5(:,4)+Y_fit_4(end,4)];
+Y_fit_5_24 = [Y_fit_2(:,2) Y_fit_2(:,4)];
 
 Y_fit_1to5_24 = [Y_fit_1_24; Y_fit_2_24; Y_fit_3_24; Y_fit_4_24; Y_fit_5_24];
 

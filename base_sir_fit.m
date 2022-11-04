@@ -49,14 +49,14 @@ xnew = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
 %xlabel('Time')
 
 Y_fit = siroutput_full(xnew,t);
-Y_fit24 = [Y_fit(:,2) Y_fit(:,4)];
+Y_fit_24 = [Y_fit(:,2) Y_fit(:,4)];
 
 % Make some plots that illustrate your findings.
 % TO ADD
 figure;
 hold on;
 plot(coviddata);
-plot(Y_fit24);
+plot(Y_fit_24);
 legend('cases','deaths','Y fit deaths', 'Y fit cases');
 title("Original data and Y fit")
 hold off;
@@ -70,11 +70,11 @@ recover_multiplier = 1.1;
 x0new = [0.0812*infection_multiplier, 0.011*fatality_multiplier, 0.59*recover_multiplier, 1, 0, 0, 0]; 
 xnew = fmincon(sirafun,x0new,A,b,Af,bf,lb,ub);
 Y_fitnew = siroutput_full(xnew,t);
-Y_fit24new = [Y_fitnew(:,2) Y_fitnew(:,4)];
+Y_fit_24new = [Y_fitnew(:,2) Y_fitnew(:,4)];
 figure;
 hold on;
 plot(coviddata);
-plot(Y_fit24new);
+plot(Y_fit_24new);
 legend('cases','deaths','Y fit deaths new', 'Y fit cases new');
 title("Original data and Y fit new")
 hold off;

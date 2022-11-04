@@ -25,6 +25,9 @@ begin = 0;
 t = 275-begin;
 Y_fit_1 = siroutput(xnew,t,coviddata(1:t,:));
 Y_fit_1_24 = [Y_fit_1(:,2) Y_fit_1(:,4)];
+%%
+adf = coviddata(1:275,:);
+%%
 
 begin = 275;
 t = 449-begin;

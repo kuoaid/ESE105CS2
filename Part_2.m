@@ -21,12 +21,23 @@ find0 = @(movaccele_1)find(diff(sign(movaccele_1)));
 % 540 as the phase point to represent the three.
 phasepoints = [275 449 540 590 674 756];
 %%
-begin = 0;
-t = 275-begin;
-Y_fit_1 = siroutput(xnew,t,coviddata(1:t,:));
+t = 275;
+covidda = table2array(COVID_STLmetro(:,5:6));
+coviddata = covidda./2737140;
+sirafun1= @(x)siroutput(x,t,coviddata(1:275,:));
+xnew1 = fmincon(sirafun1,x0,A,b,Af,bf,lb,ub);
+Y_fit_1 = siroutput_full(xnew1,t);
 Y_fit_1_24 = [Y_fit_1(:,2) Y_fit_1(:,4)];
-%%
 
+figure;
+hold on;
+plot(coviddata);
+plot(Y_fit_1_24);
+hold off;
+legend('cases','deaths');
+title("Original data and Y fit for five phases")
+
+%%
 begin = 275;
 t = 449-begin;
 Y_fit_2 = siroutput_full(xnew,t);

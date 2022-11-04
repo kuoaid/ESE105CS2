@@ -3,7 +3,6 @@ covidda = table2array(COVID_STLmetro(:,5:6));
 coviddata = covidda./2737140; % TO SPECIFY
 
 t = length(coviddata); % TO SPECIFY
-begin = 0;
 % The following line creates an 'anonymous' function that will return the cost (i.e., the model fitting error) given a set
 % of parameters.  There are some technical reasons for setting this up in this way.
 % Feel free to peruse the MATLAB help at
@@ -33,7 +32,7 @@ bf = 1;
 % lb < x < ub
 % here, the inequality is imposed element-wise
 % If you don't want such a constraint, keep these matrices empty.
-ub = [1, 0.7, 0.7, 1, 1, 1, 0.9]';
+ub = [1, 0.9, 0.9, 1, 1, 1, 0.9]';
 lb = [0, 0, 0, 0, 0, 0, 0]';
 
 % Specify some initial parameters for the optimizer to start from

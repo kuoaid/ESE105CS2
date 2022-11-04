@@ -39,5 +39,4 @@ deaths = data(:,1);
 yinfec = y(:,2);
 ydeath = y(:,4);
 f = norm(ydeath - deaths) + norm(yinfec - cases);
-
 end

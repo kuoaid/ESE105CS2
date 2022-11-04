@@ -71,11 +71,11 @@ recover_multiplier = 1.2;
 x0new = [0.0812*infection_multiplier, 0.011*fatality_multiplier, 0.59*recover_multiplier, 1, 0, 0, 0]; 
 xnew = fmincon(sirafun,x0new,A,b,Af,bf,lb,ub);
 Y_fitnew = siroutput_full(xnew,t);
-Y_fit_24new = [Y_fitnew(:,3) Y_fitnew(:,4)];
+Y_fit_DCnew = [Y_fitnew(:,3) Y_fitnew(:,4)];
 figure;
 hold on;
 plot(coviddata);
-plot(Y_fit_24new);
+plot(Y_fit_DCnew);
 legend('cases','deaths','Y fit deaths new', 'Y fit cases new');
 title("Original data and Y fit new")
 hold off;

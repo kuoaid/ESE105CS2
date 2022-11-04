@@ -50,7 +50,7 @@ x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
 %xlabel('Time')
 
 Y_fit = siroutput_full(x,t);
-Y_fit_DC = [Y_fit(:,3) Y_fit(:,4)];
+Y_fit_DC = ones([t,1])'-Y_fit(1:t,1);
 
 % Make some plots that illustrate your findings.
 % TO ADD
@@ -66,12 +66,14 @@ hold off;
 %%
 % Changes based on policies
 infection_multiplier = 0.8;
-fatality_multiplier = 1;
-recover_multiplier = 1.2;
-x0new = [0.0812*infection_multiplier, 0.011*fatality_multiplier, 0.59*recover_multiplier, 1, 0, 0, 0]; 
+% fatality_multiplier = 1;
+% recover_multiplier = 1.2;
+ub = [x(1)*infection_multiplier, 0.005, 0.06, 1, 0.1, 0, 0]';
+lb = [0, 0, 0, 1 ,0,0,0]';
 xnew = fmincon(sirafun,x0new,A,b,Af,bf,lb,ub);
+disp(xnew(1))
 Y_fitnew = siroutput_full(xnew,t);
-Y_fit_DCnew = [Y_fitnew(:,3) Y_fitnew(:,4)];
+Y_fit_DCnew = ones([t,1])'-Y_fitnew(1:t,1);
 figure;
 hold on;
 plot(coviddata);

@@ -34,9 +34,9 @@ y = lsim(sys_sir_base,zeros(t,1),linspace(0,t-1,t),x0);
 % modeled data and the true data. Norms and distances will be useful here.
 % Hint: This is a central part of this case study!  choices here will have
 % a big impact!
-cases = data(:,2);
-deaths = data(:,1);
-yinfec = y(:,2);
-ydeath = y(:,4);
+cases = data(:,1);
+deaths = data(:,2);
+yinfec = ones([t,1])'-y(1:t,1);
+ydeath = y(1:t,4);
 f = norm(ydeath - deaths) + norm(yinfec - cases);
 end

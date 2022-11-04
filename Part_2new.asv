@@ -27,8 +27,8 @@ data2 = table2array(COVID_STLmetro(t1:t2,"deaths"))/2737140;
 coviddata = [data1 data2];
 
 sirafun= @(x)siroutput(x,t,coviddata);
-ub = [0.09, 0.05, 0.6, 0.9943,  0.1, 0, 0]';
-lb = [0, 0, 0,  0.9943, 0, 0, 0]';
+ub = [0.09, 0.05, 0.6, 0.999448,  0.1, 0, 0]';
+lb = [0, 0, 0,  0.999448, 0, 0, 0]';
 x0 = [0.008, 0.001, 0.01, 0.999, 0.001, 0, 0];
 x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
 Y_fit_2 = siroutput_full(x,t);
@@ -42,8 +42,8 @@ data2 = table2array(COVID_STLmetro(t1:t2,"deaths"))/2737140;
 coviddata = [data1 data2];
 
 sirafun= @(x)siroutput(x,t,coviddata);
-ub = [0.09, 0.005, 0.06, 0.9694, 0.1, 0, 0]';
-lb = [0, 0, 0, 0.9694 ,0,0,0]';
+ub = [0.09, 0.005, 0.06, 0.9668, 0.1, 0, 0]';
+lb = [0, 0, 0, 0.9668 ,0,0,0]';
 x0 = [0.008, 0.001, 0.01, 0.999, 0.001, 0, 0];
 x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
 Y_fit_3 = siroutput_full(x,t);
@@ -57,11 +57,11 @@ data2 = table2array(COVID_STLmetro(t1:t2,"deaths"))/2737140;
 coviddata = [data1 data2];
 
 sirafun= @(x)siroutput(x,t,coviddata);
-ub = [0.09, 0.005, 0.06, 0.9041, 0.1, 0, 0]';
-lb = [0, 0, 0, 0.9041,0,0,0]';
+ub = [0.09, 0.005, 0.06, 0.9053, 0.1, 0, 0]';
+lb = [0, 0, 0, 0.9053,0,0,0]';
 x0 = [0.008, 0.001, 0.01, 0.999, 0.001, 0, 0];
 x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
-Y_fit_4 = siroutput_full(x,t);
+Y_fit_3 = siroutput_full(x,t);
 
 % for 5 model
 t1 = 494;
@@ -72,46 +72,15 @@ data2 = table2array(COVID_STLmetro(t1:t2,"deaths"))/2737140;
 coviddata = [data1 data2];
 
 sirafun= @(x)siroutput(x,t,coviddata);
-ub = [0.09, 0.005, 0.06, 0.8908, 0.1, 0, 0]';
-lb = [0, 0, 0, 0.8908,0,0,0]';
+ub = [0.09, 0.005, 0.06, 0.4620, 0.1, 0, 0]';
+lb = [0, 0, 0, 0.4620,0,0,0]';
 x0 = [0.008, 0.001, 0.01, 0.999, 0.001, 0, 0];
 x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
-Y_fit_5 = siroutput_full(x,t);
+Y_fit_3 = siroutput_full(x,t);
 
-% for 6 model
-t1 = 652;
-t2 = 705;
-t = t2 - t1 + 1;
-data1 = table2array(COVID_STLmetro(t1:t2,"cases"))/2737140;
-data2 = table2array(COVID_STLmetro(t1:t2,"deaths"))/2737140;
-coviddata = [data1 data2];
-
-sirafun= @(x)siroutput(x,t,coviddata);
-ub = [0.09, 0.005, 0.06, 0.8446, 0.1, 0, 0]';
-lb = [0, 0, 0, 0.8446,0,0,0]';
-x0 = [0.008, 0.001, 0.01, 0.999, 0.001, 0, 0];
-x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
-Y_fit_6 = siroutput_full(x,t);
-
-% for 7 model
-t1 = 706;
-t2 = 798;
-t = t2 - t1 + 1;
-data1 = table2array(COVID_STLmetro(t1:t2,"cases"))/2737140;
-data2 = table2array(COVID_STLmetro(t1:t2,"deaths"))/2737140;
-coviddata = [data1 data2];
-
-sirafun= @(x)siroutput(x,t,coviddata);
-ub = [0.09, 0.005, 0.06, 0.7630, 0.1, 0, 0]';
-lb = [0, 0, 0, 0.7630,0,0,0]';
-x0 = [0.008, 0.001, 0.01, 0.999, 0.001, 0, 0];
-x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
-Y_fit_7 = siroutput_full(x,t);
-
-Y_fit_total = cat(1,Y_fit_1,Y_fit_2,Y_fit_3,Y_fit_4,Y_fit_5,Y_fit_6,Y_fit_7);
-
+Y_fit_total = cat(1,Y_fit_1,Y_fit_2,Y_fit_3,Y_fit_4);
 t1 = 1;
-t2 = 798;
+t2 = 337;
 t = t2 - t1 + 1;
 data1 = table2array(COVID_STLmetro(t1:t2,"cases"))/2737140;
 data2 = table2array(COVID_STLmetro(t1:t2,"deaths"))/2737140;
@@ -120,10 +89,10 @@ figure;
 hold on;
 plot(t1:t2,data1);
 plot(t1:t2,data2);
-model_I = ones([t,1])'-Y_fit_total(1:t,1);
+model_inf = Y_fit_total(1:t,2) + Y_fit_total(1:t,3) + Y_fit_total(1:t,4);
 plot(t1:t2,model_inf);
-model_D = Y_fit_total(1:t,4);
+model_deaths = Y_fit_total(1:t,4);
 plot(t1:t2,model_deaths);
-legend('data1','data2','model I','model D');
-title("Original data and Y fit for 7 models")
+legend('data1','data2','model inf','model deaths');
+title("Original data and Y fit24try")
 hold off;

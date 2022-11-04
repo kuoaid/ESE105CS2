@@ -25,6 +25,9 @@ end
 
 figure(1);
 plot(result');
+legend('S','I','R','D');
+xlabel('Time')
+ylabel('Percentage Population(Original)');
 
 result2 = [];
 x02 = [1; 0; 0; 0];
@@ -44,4 +47,7 @@ end
 
 figure(2);
 plot(result2');
+legend('S','I','R','D');
+xlabel('Time')
+ylabel('Percentage Population(Reinfection)');
 

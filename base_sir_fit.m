@@ -32,8 +32,10 @@ bf = 1;
 % lb < x < ub
 % here, the inequality is imposed element-wise
 % If you don't want such a constraint, keep these matrices empty.
-ub = [1, 0.9, 0.9, 1, 1, 1, 0.9]';
-lb = [0, 0, 0, 0, 0, 0, 0]';
+% ub = [1, 1, 1, 1, 1, 1, 1]';
+% lb = [0, 0, 0, 0, 0, 0, 0]';
+ub = [0.09, 0.005, 0.06, 1, 0.1, 0, 0]';
+lb = [0, 0, 0, 1 ,0,0,0]';
 
 % Specify some initial parameters for the optimizer to start from
 x0 = [0.0812, 0.011, 0.59, 1, 0, 0, 0]; 
@@ -41,21 +43,21 @@ x0 = [0.0812, 0.011, 0.59, 1, 0, 0, 0];
 % This is the key line that tries to opimize your model parameters in order to
 % fit the data
 % note tath you 
-xnew = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
+x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
 
 %plot(Y);
 %legend('S','I','R','D');
 %xlabel('Time')
 
-Y_fit = siroutput_full(xnew,t);
-Y_fit_24 = [Y_fit(:,2) Y_fit(:,4)];
+Y_fit = siroutput_full(x,t);
+Y_fit_DC = [Y_fit(:,3) Y_fit(:,4)];
 
 % Make some plots that illustrate your findings.
 % TO ADD
 figure;
 hold on;
 plot(coviddata);
-plot(Y_fit_24);
+plot(Y_fit_DC);
 legend('cases','deaths','Y fit deaths', 'Y fit cases');
 title("Original data and Y fit")
 hold off;
@@ -63,13 +65,13 @@ hold off;
 
 %%
 % Changes based on policies
-infection_multiplier = 0.9;
+infection_multiplier = 0.8;
 fatality_multiplier = 1;
-recover_multiplier = 1.1;
+recover_multiplier = 1.2;
 x0new = [0.0812*infection_multiplier, 0.011*fatality_multiplier, 0.59*recover_multiplier, 1, 0, 0, 0]; 
 xnew = fmincon(sirafun,x0new,A,b,Af,bf,lb,ub);
 Y_fitnew = siroutput_full(xnew,t);
-Y_fit_24new = [Y_fitnew(:,2) Y_fitnew(:,4)];
+Y_fit_24new = [Y_fitnew(:,3) Y_fitnew(:,4)];
 figure;
 hold on;
 plot(coviddata);

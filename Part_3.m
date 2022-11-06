@@ -1,5 +1,5 @@
 load('COVIDdata.mat');
-load('mockdata.mat');
+load('mockdata_v2.mat');
 
 t1 = 1;
 t2 = 365;
@@ -17,15 +17,16 @@ x0 = [0.0812, 0.011, 0.59, 0.01, 0.0001, 1, 0, 0, 0, 0];
 x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
 
 Y_fit = siroutput_full_withVacc(x,t);
-Y_fit_DC = ones([t,1])-Y_fit(1:t,1)-Y_fit(1:t,5);
+Y_fit_D = ones([t,1])-Y_fit(1:t,1)-Y_fit(1:t,5);
+Y_fit_C = Y_fit(1:t,4);
 
 figure;
 hold on;
 plot(coviddata);
-plot(Y_fit_DC);
-plot(Y_fit(1:t,4));
+plot(Y_fit_D);
+plot(Y_fit_C);
 hold off;
 title("Mock COVID data");
 xlabel("Days");
 ylabel("Fraction of total population");
-legend('Cases','Deaths','Y fit cases','Y fit deaths');
+legend('Deaths','Cases','Y fit deaths','Y fit cases');

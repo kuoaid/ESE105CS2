@@ -4,7 +4,7 @@ load('mockdata_v2.mat');
 t1 = 1;
 t2 = 365;
 t = t2 - t1 + 1;
-coviddata = [newInfections(t1:t2)' cumulativeDeaths(t1:t2)'];
+coviddata = [InfectedProportion(t1:t2)' cumulativeDeaths(t1:t2)'];
 sirafun= @(x)siroutput_withVacc(x,t,coviddata);
 A = [];  
 b = [];
@@ -29,7 +29,7 @@ hold off;
 title("Mock COVID data");
 xlabel("Days");
 ylabel("Fraction of total population");
-legend('newInfections','cumulativeDeaths','Y fit cases','Y fit deaths');
+legend('InfectedProportion','cumulativeDeaths','Y fit cases','Y fit deaths');
 %%
 vaxpop = Y_fit(:,5);
 vaxbreak = ones([t,1])-Y_fit(1:t,1)-Y_fit(1:t,5);
@@ -39,3 +39,7 @@ plot(vaxpop);
 plot(vaxbreak);
 hold off;
 legend('vaxpop','vaxbreak');
+
+myMatrix = [vaxpop vaxbreak];
+mat_file = matfile('competition.mat','Writable',true);
+save('competition.mat','myMatrix');

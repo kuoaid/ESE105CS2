@@ -150,7 +150,7 @@ disp(x(1));
 
 % The policy that reduce cases and deaths by 25%
 sirafun= @(x)siroutput(x,t,coviddata);
-ub = [1.6049e-04, 0.005, 0.06, 0.8961, 0.1, 0, 0]';
+ub = [x(1)*0.75, 0.005, 0.06, 0.8961, 0.1, 0, 0]';
 lb = [0, 0, 0, 0.8961,0,0,0]';
 x0 = [0.008, 0.001, 0.01, 0.999, 0.001, 0, 0];
 x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
